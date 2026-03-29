@@ -1,0 +1,2 @@
+#!/bin/bash
+s6-setuidgid app websockify --web=/opt/noVNC 8080 localhost:5900

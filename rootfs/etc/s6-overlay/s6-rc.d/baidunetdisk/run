@@ -1,0 +1,5 @@
+#!/command/with-contenv bash
+
+export HOME=/app
+
+s6-setuidgid app /opt/baidunetdisk/baidunetdisk --no-sandbox

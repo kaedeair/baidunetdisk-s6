@@ -1,0 +1,60 @@
+#!/command/with-contenv bash
+
+set -euo pipefail
+
+readonly MARKER="/.initialized"
+readonly FLUXBOX_DIR="/app/.fluxbox"
+
+initialize() {
+  local APP_UID=${PUID:-1000}
+  local APP_GID=${PUID:-1000}
+
+  usermod -u "$APP_UID" app
+  groupmod -g "$APP_GID" app
+  mkdir -p /app/.vnc /app/.fluxbox
+  usermod -d /app app
+  touch "$MARKER"
+  init_vnc
+  init_fluxbox
+}
+
+fix_permission() {
+  chown app:app -R /app
+}
+
+init_vnc() {
+  if [ "${VNC_PASSWORD:+w}" = "w" ] &&  [ ! -f "$VNC_PASSWORD_FILE" ];then
+    echo "$VNC_PASSWORD" | vncpasswd -f > "$VNC_PASSWORD_FILE" 2> /dev/null;
+    chmod 600 "$VNC_PASSWORD_FILE"
+  fi
+}
+
+init_fluxbox() {
+  if [ ! -f "${FLUXBOX_DIR}/apps" ];then
+    cat << EOF > "${FLUXBOX_DIR}/apps"
+[app] (title=百度网盘)
+  [Maximized] {yes}
+[end]
+[app] (title=baidunetdisk)
+  [Minimized] {yes}
+[end]
+EOF
+  fi
+
+  if [ ! -f "${FLUXBOX_DIR}/init" ];then
+    cat << EOF > "${FLUXBOX_DIR}/init"
+session.styleFile:      /usr/share/fluxbox/styles/Meta
+EOF
+  fi
+}
+
+if [ ! -f "$MARKER" ]; then
+  initialize
+fi
+
+fix_permission
+
+
+
+
+

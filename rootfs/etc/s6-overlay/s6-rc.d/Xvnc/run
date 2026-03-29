@@ -1,0 +1,11 @@
+#!/command/with-contenv bash
+
+PARAM=("$DISPLAY" -geometry "${GEOMETRY:-1280x720}" -AcceptSetDesktopSize)
+
+if [ "${VNC_PASSWORD:-w}" = "w" ];then
+  PARAM+=(-SecurityTypes None)
+elif [ -f  "$VNC_PASSWORD_FILE" ];then
+  PARAM+=(-rfbauth "$VNC_PASSWORD_FILE")
+fi
+
+s6-setuidgid app Xvnc "${PARAM[@]}"

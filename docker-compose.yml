@@ -1,0 +1,21 @@
+services:
+  baidunetdisk:
+    container_name: baidunetdisk
+    image: kaedeair/baidunetdisk:latest
+    environment:
+      VNC_PASSWORD:           #optional
+      GEOMETRY: 1280x720      #optional
+    security_opt:
+      - no-new-privileges
+    cap_add:
+      - SETGID
+      - SETUID
+      - CHOWN
+      - DAC_OVERRIDE
+    cap_drop:
+      - ALL
+    volumes:
+      - ./config:/app
+    ports:
+      - "8080:8080"           #web
+      - "5900:5900"           #vnc
