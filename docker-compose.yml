@@ -5,6 +5,8 @@ services:
     environment:
       VNC_PASSWORD:           #optional
       GEOMETRY: 1280x720      #optional
+      PUID:                   #output of `id -u`
+      PGID:                   #output of `id -g`
     security_opt:
       - no-new-privileges
     cap_add:
