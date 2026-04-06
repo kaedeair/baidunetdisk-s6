@@ -3,10 +3,10 @@ services:
     container_name: baidunetdisk
     image: kaedeair/baidunetdisk:latest
     environment:
-      VNC_PASSWORD:           #optional
-      GEOMETRY: 1280x720      #optional
-      PUID:                   #output of `id -u`
-      PGID:                   #output of `id -g`
+      VNC_PASSWORD:           #optional, default ""
+      GEOMETRY:               #optional, default 1280x720
+      PUID:                   #optional, default 1000 (recommend: `id -u`)
+      PGID:                   #optional, default 1000 (recommend: `id -g`)
     security_opt:
       - no-new-privileges
     cap_add:
