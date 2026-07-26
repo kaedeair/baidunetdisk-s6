@@ -11,7 +11,7 @@ initialize() {
 
   usermod -u "$APP_UID" app
   groupmod -g "$APP_GID" app
-  mkdir -p /app/.vnc /app/.fluxbox
+  mkdir -p /app/.vnc /app/.fluxbox /downloads
   usermod -d /app app
   touch "$MARKER"
   init_vnc

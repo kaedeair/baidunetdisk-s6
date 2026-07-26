@@ -33,6 +33,7 @@ Baidunetdisk running inside container with VNC/Web access
    -e PUID="$(id -u)"  \
    -e PGID="$(id -g)"  \
    -v <host_mount_directory>:/app \
+   -v <host_mount_directory>:/downloads \
    -p 8080:8080 \
    -p 5900:5900 \
    kaedeair/baidunetdisk:latest
@@ -52,9 +53,13 @@ See`docker-compose.yml` for detail
 
 ### Data Persistence
 
-| Mount Point | Description         |
-|-------------|---------------------|
-| /app        | User configurations |
+| Mount Point | Description                    |
+|-------------|--------------------------------|
+| /app        | User configurations            |
+| /downloads  | Optional downloads directory\* |
+
+\* If not mounted, downloads can be stored in `/app`.
+This mount point is optional and only serves to separate downloaded files from configuration data.
 
 ### Ports
 
