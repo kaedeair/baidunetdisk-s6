@@ -20,13 +20,9 @@ RUN apt-get update && \
         websockify \
         libasound2 \
         libgtk-3-0 \
-        libnotify4 \
         libnss3 \
-        libxss1 \
+        libatk-bridge2.0-0t64 \
         libxtst6 \
-        xdg-utils \
-        libatspi2.0-0 \
-        libsecret-1-0 \
         libgtkmm-2.4-1t64 && \
     apt-get --quiet clean && \
     rm -rf /var/lib/apt/lists/*
