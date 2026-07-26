@@ -28,6 +28,7 @@ Baidunetdisk running inside container with VNC/Web access
    --cap-add CHOWN \
    --cap-add DAC_OVERRIDE \
    --cap-drop ALL \
+   --shm-size=512mb \
    -e VNC_PASSWORD=<vnc_password> \
    -e GEOMETRY=<resolution> \
    -e PUID="$(id -u)"  \
@@ -38,6 +39,8 @@ Baidunetdisk running inside container with VNC/Web access
    -p 5900:5900 \
    kaedeair/baidunetdisk:latest
  ```
+
+`shm-size` can be adjusted according to actual requirements
 
 ### Docker Compose
 See`docker-compose.yml` for detail

@@ -28,6 +28,7 @@
    --cap-add CHOWN \
    --cap-add DAC_OVERRIDE \
    --cap-drop ALL \
+   --shm-size=512mb \
    -e VNC_PASSWORD=<VNC密码> \
    -e GEOMETRY=<分辨率> \
    -e PUID="$(id -u)"  \
@@ -38,6 +39,8 @@
    -p 5900:5900 \
    kaedeair/baidunetdisk:latest
  ```
+
+`shm-size`可根据实际需要进行调整
 
 ### 容器编排
 详见`docker-compose.yml`

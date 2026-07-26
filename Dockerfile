@@ -1,7 +1,7 @@
 FROM debian:13.4-slim
 
 ARG S6_VER=3.2.2.0
-ARG BAIDUNETDISK_VER=4.17.8
+ARG BAIDUNETDISK_VER=8.6.0
 ARG NOVNC_VER=1.6.0
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV TZ=Asia/Shanghai
@@ -26,7 +26,8 @@ RUN apt-get update && \
         libxtst6 \
         xdg-utils \
         libatspi2.0-0 \
-        libsecret-1-0 && \
+        libsecret-1-0 \
+        libgtkmm-2.4-1t64 && \
     apt-get --quiet clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -42,7 +43,7 @@ RUN wget -P /tmp https://github.com/just-containers/s6-overlay/releases/download
     tar -C / -Jxpf /tmp/s6-overlay-$(uname -m).tar.xz && \
     rm -rf /tmp/*
 
-RUN wget -O /tmp/client.deb https://pkg-ant.baidu.com/issue/netdisk/LinuxGuanjia/4.17.8/baidunetdisk_4.17.8_amd64.deb  && \
+RUN wget -O /tmp/client.deb https://pkg-ant.baidu.com/issue/netdisk/LinuxGuanjia/${BAIDUNETDISK_VER}/baidunetdisk_${BAIDUNETDISK_VER}_amd64.deb  && \
     dpkg -i /tmp/client.deb && \
     rm /tmp/client.deb
 

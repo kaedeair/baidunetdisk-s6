@@ -16,6 +16,7 @@ services:
       - DAC_OVERRIDE
     cap_drop:
       - ALL
+    shm_size: 512mb
     volumes:
       - ./config:/app
       - ./downloads:/downloads
